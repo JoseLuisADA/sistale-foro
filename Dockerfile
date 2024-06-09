@@ -1,5 +1,5 @@
 # Etapa de construcción
-FROM node:latest AS builder
+FROM node:22 AS builder
 
 # Establece el directorio de trabajo
 WORKDIR /usr/src/app
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Etapa de producción
-FROM node:latest
+FROM node:22
 
 # Establece el directorio de trabajo
 WORKDIR /usr/src/app
