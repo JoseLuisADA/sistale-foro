@@ -1,25 +1,20 @@
-# Utiliza la última imagen base de Node.js
+# Usar la imagen oficial de Node.js como base
 FROM node:latest
 
-# Crea el directorio de la aplicación y establece los permisos
-RUN mkdir -p /usr/src/app && chown -R node:node /usr/src/app
+# Establecer el directorio de trabajo
+WORKDIR ./
 
-# Define el directorio de trabajo
-WORKDIR /usr/src/app
-
-# Copia los archivos de la aplicación y establece los permisos
+# Copiar el package.json y el package-lock.json
 COPY package*.json ./
-RUN chown node:node package*.json
 
-# Instala las dependencias como el usuario adecuado
-USER node
+# Instalar las dependencias del proyecto
 RUN npm install
 
-# Copia el resto del código de la aplicación
-COPY --chown=node:node . .
+# Copiar el resto del código de la aplicación
+COPY . .
 
-# Exponer el puerto
+# Exponer el puerto que tu aplicación utiliza
 EXPOSE 3000
 
 # Comando para iniciar la aplicación
-CMD ["npm", "start"]
+CMD [ "npm", "start" ]
