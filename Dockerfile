@@ -1,20 +1,20 @@
-# Usar la imagen oficial de Node.js como base
-FROM node:latest
+# Usa una imagen oficial de Node.js como imagen base
+FROM node:18.20.0
 
-# Establecer el directorio de trabajo
-WORKDIR ./
+# Establece el directorio de trabajo
+WORKDIR /usr/src/app
 
-# Copiar el package.json y el package-lock.json
+# Copia el package.json y el package-lock.json
 COPY package*.json ./
 
-# Instalar las dependencias del proyecto
+# Instala las dependencias de la aplicación
 RUN npm install
 
-# Copiar el resto del código de la aplicación
+# Copia el resto del código de la aplicación
 COPY . .
 
-# Exponer el puerto que tu aplicación utiliza
-EXPOSE 3000
+# Expone el puerto que tu aplicación utilizará
+EXPOSE 8080
 
 # Comando para iniciar la aplicación
 CMD [ "npm", "start" ]
