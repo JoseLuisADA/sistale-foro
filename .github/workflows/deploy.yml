@@ -3,7 +3,7 @@ name: Deploy Next.js App to Azure
 on:
   push:
     branches:
-      - main  # O la rama que prefieras
+      - main  # Cambia esto a la rama que uses para despliegues
 
 jobs:
   build-and-deploy:
