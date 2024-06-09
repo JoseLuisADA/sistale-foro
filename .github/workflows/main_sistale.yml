@@ -22,15 +22,15 @@ jobs:
     - name: Log in to registry
       uses: docker/login-action@v2
       with:
-        registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_12c3e6b24fc74b809f7e3543bd3323dc }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_9c27edec19f24940b54d88e5d28bb851 }}
+        registry: https://sistale.azurecr.io/
+        username: ${{ secrets.AzureAppService_ContainerUsername_4aa4b8662cb249768d7313936043d132 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_2bd73d34abed493aa6071b124eaf189a }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_12c3e6b24fc74b809f7e3543bd3323dc }}/dummyimage:${{ github.sha }}
+        tags: sistale.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4aa4b8662cb249768d7313936043d132 }}/mcr.microsoft.com/appsvc/staticsite:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'sistale'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_89f4c273b5104b459d3d3be6aced5d2a }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_12c3e6b24fc74b809f7e3543bd3323dc }}/dummyimage:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_6e90431ae2744b87b2cae333fadaf254 }}
+        images: 'sistale.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4aa4b8662cb249768d7313936043d132 }}/mcr.microsoft.com/appsvc/staticsite:${{ github.sha }}'
