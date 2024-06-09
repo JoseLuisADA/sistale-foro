@@ -29,7 +29,7 @@ COPY --from=builder /usr/src/app ./
 RUN npm install --only=production
 
 # Expone el puerto que tu aplicación utilizará
-EXPOSE 8080
+EXPOSE 3000
 
 # Comando para iniciar la aplicación en modo producción
 CMD [ "npm", "start" ]
