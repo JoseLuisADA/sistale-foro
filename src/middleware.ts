@@ -7,7 +7,7 @@ export async function middleware(req: NextRequest) {
 
   const response: NextResponse = NextResponse.next()
   const url = req.nextUrl
-  const cookie = req.cookies.get('session') || null
+  const cookie = req.cookies.get('sistale') || null
   let role: string = ''
   let username: string = ''
 
@@ -39,7 +39,7 @@ export async function middleware(req: NextRequest) {
       console.log("\n-----------------------------------------------")
 
     } catch (error) {
-      console.log('ERROR EN MIDDLEWARE:')
+      console.log('AVISO EN MIDDLEWARE:')
       if (error instanceof Object) {
         console.log('LLAVE DE TOKEN VACÍA O NO HAY TOKEN')
       }
