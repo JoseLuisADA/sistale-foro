@@ -31,3 +31,33 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ message: "Error interno" }, { status: 500 });
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  const { pathname } = new URL(req.url);
+  const idComentario = pathname.split('/').pop();
+
+  try {
+    const response = await axiosInstance.delete(`/comentario/${idComentario}`, {
+      headers: {
+        'Authorization': req.headers.get('Authorization') || '',
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true, 
+    });
+
+    if (response.status !== 200) {
+      throw new Error('No se pudo eliminar el comentario');
+    }
+
+    return NextResponse.json({ message: 'Comentario eliminado correctamente' }, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    if (isAxiosError(error)) {
+      if (error.response) {
+        const message = error.response.data.message || "Error desconocido al borrar el comentario";
+        return NextResponse.json({ message }, { status: error.response.status });
+      }
+    }
+    return NextResponse.json({ message: "Error interno" }, { status: 500 });
+  }
+}
