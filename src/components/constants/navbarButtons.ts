@@ -3,6 +3,11 @@ export const publicNavigation = [
       name: 'Inicio', 
       href: '/', 
       current: false 
+    },
+    { 
+      name: 'Futuras actualizaciones', 
+      href: '/future-updates', 
+      current: false 
     }
   ]
   
