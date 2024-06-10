@@ -3,10 +3,10 @@ import React from 'react';
 import NavBar from './NavBar';
 
 const Header = () => (
-  <header>
-    <h1 className="text-center text-4xl">
-      Sistale Foro
-    </h1>
+  <header className="bg-gray-800 inline-flex">
+    <img 
+    className='w-20 ml-8' 
+    src="https://i.ibb.co/QpJfTTR/logo-removebg-preview.png"></img>
     <NavBar />
   </header>
 );
