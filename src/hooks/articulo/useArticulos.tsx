@@ -26,7 +26,9 @@ const useArticulos = (page: number = 1, size: number = 10) => {
       setArticulos(data.articulos);
       setTotal(data.total);
     } catch (error) {
-      setError(error.message);
+      console.log("Error en useArticulos:")
+      console.log(error)
+      setError('Artículos temporalmente no disponibles');
     } finally {
       setIsLoading(false);
     }

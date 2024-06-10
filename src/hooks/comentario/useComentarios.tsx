@@ -1,6 +1,5 @@
 // src/hooks/useComentarios.tsx
 import { useState, useEffect } from 'react';
-import axiosInstance from '../../../axios'; // Importa tu instancia configurada de axios
 import { isAxiosError } from 'axios';
 import { ComentarioProps } from '../../types/comentarioProps';
 
@@ -13,15 +12,21 @@ const useComentarios = (idArticulo: string) => {
     setIsLoading(true);
     setError(null);
     try {
-      const { data } = await axiosInstance.get(`/comentarios/${idArticulo}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const response = await fetch(`/api/comentario/${idArticulo}`, {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
       });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Comentarios temporalmente no disponibles');
+      }
       setComentarios(data);
     } catch (error) {
       if (isAxiosError(error)) {
-        setError(error.response?.data.message || 'Error al cargar los comentarios');
+        setError('Comentarios temporalmente no disponibles');
       } else {
         setError('Error desconocido');
       }
