@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 const Header = () => (
   <header>
     <h1 className="text-center text-4xl">
-      Sistale Foroo
+      Sistale Foro
     </h1>
     <NavBar />
   </header>
