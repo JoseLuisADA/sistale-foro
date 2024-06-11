@@ -50,7 +50,7 @@ const ArticulosList = () => {
 
   return (
     <div>
-      {isLoading && <p className="text-center">Cargando artículos...</p>}
+      {isLoading && <p className="text-center mt-10">Cargando artículos... , si tarda no te preocupes, solo es la primera vez.</p>}
       {error && <p className="text-red-500 text-center font-bold italic">{error}</p>}
       {!isLoading && !error && articulos.length > 0 && (
         <>
@@ -78,7 +78,6 @@ const ArticulosList = () => {
                     )}
                   </>
                 )}
-
                 <h2 className="text-xl font-bold">{articulo.titulo}</h2>
                 <p className="text-gray-700">{articulo.contenido}</p>
                 <p className="text-sm text-gray-500">Por: {articulo.username}</p>
@@ -99,15 +98,15 @@ const ArticulosList = () => {
           <div className="pagination flex justify-between mt-4">
             <button
               onClick={handlePreviousPage}
-              disabled={page === 1 || isLoading}
-              className="px-4 py-2 bg-blue-800 text-white rounded">
+              disabled={page <= 0 || isLoading}
+              className="px-4 py-2 ml-3 bg-blue-800 text-white rounded">
               Anterior
             </button>
             <span className="px-4 py-2">Página {page}</span>
             <button
               onClick={handleNextPage}
-              disabled={articulos.length === 0 || isLoading}
-              className="px-4 py-2 bg-blue-800 text-white rounded">
+              disabled={articulos.length <= 10 || isLoading}
+              className="px-4 py-2 mr-3 disabled:bg-blue-200 bg-blue-800 text-white rounded">
               Siguiente
             </button>
           </div>
