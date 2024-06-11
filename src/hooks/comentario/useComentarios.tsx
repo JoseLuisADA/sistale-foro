@@ -1,4 +1,3 @@
-// src/hooks/useComentarios.tsx
 import { useState, useEffect } from 'react';
 import { isAxiosError } from 'axios';
 import { ComentarioProps } from '../../types/comentarioProps';

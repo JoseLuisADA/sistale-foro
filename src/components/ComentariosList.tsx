@@ -1,13 +1,10 @@
-//sistaleforo-web-final/src/components/ComentariosList.tsx
 'use client';
 import React from 'react';
 import PropTypes from 'prop-types';
-import useComentarios from '../hooks/comentario/useComentarios';
 import { ComentarioProps } from '../types/comentarioProps';
 import DeleteComentarioButton from './DeleteComentarioButton';
 
-const ComentariosList = ({ idArticulo, user }) => {
-  const { comentarios, isLoading, refetch } = useComentarios(idArticulo);
+const ComentariosList = ({ user, comentarios, isLoading, refetch }) => {
 
   const handleCommentDeleted = () => {
     refetch();
@@ -41,6 +38,9 @@ const ComentariosList = ({ idArticulo, user }) => {
 ComentariosList.propTypes = {
   idArticulo: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired,
+  comentarios: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  refetch: PropTypes.func.isRequired,
 };
 
 export default ComentariosList;

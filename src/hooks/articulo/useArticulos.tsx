@@ -1,9 +1,9 @@
-// src/hooks/useArticulos.tsx
 "use client"
 import { useState, useEffect, useCallback } from 'react';
+import { ArticuloProps } from '../../types/articuloProps';
 
-const useArticulos = (page: number = 1, size: number = 10) => {
-  const [articulos, setArticulos] = useState([]);
+const useArticulos = (page: number = 1, categoria: string, size: number = 10) => {
+  const [articulos, setArticulos] = useState<ArticuloProps[]>([]);
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -12,7 +12,7 @@ const useArticulos = (page: number = 1, size: number = 10) => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`/api/articulo?page=${page}&size=${size}`, {
+      const response = await fetch(`/api/articulo?categoria=${categoria}&page=${page}&size=${size}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -26,13 +26,13 @@ const useArticulos = (page: number = 1, size: number = 10) => {
       setArticulos(data.articulos);
       setTotal(data.total);
     } catch (error) {
-      console.log("Error en useArticulos:")
-      console.log(error)
+      console.log("Error en useArticulos:");
+      console.log(error);
       setError('Artículos temporalmente no disponibles');
     } finally {
       setIsLoading(false);
     }
-  }, [page, size]);
+  }, [page, size, categoria]);
 
   useEffect(() => {
     fetchArticulos();

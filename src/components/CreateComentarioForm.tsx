@@ -1,24 +1,23 @@
-'use client';
-// src/components/CreateComentarioForm.jsx
-import React, { useState } from 'react';
-import PropTypes from 'prop-types'; // Importa PropTypes
-import useCreateComentario from '../hooks/comentario/useCreateComentario';
+'use client'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import useCreateComentario from '../hooks/comentario/useCreateComentario'
 
 const CreateComentarioForm = ({ idArticulo, username, token, onCommentAdded }) => {
-  const [contenido, setContenido] = useState('');
-  const { createComentario, isLoading, error } = useCreateComentario();
+  const [contenido, setContenido] = useState('')
+  const { createComentario, isLoading, error } = useCreateComentario()
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
     console.log("ENTRANDO EN HANDLE SUBMIT DE CREATE COMENTARIO FORM")
     console.log("ID ARTICULO:")
     console.log(idArticulo)
-    const newComment = await createComentario(contenido, username, idArticulo, token);
+    const newComment = await createComentario(contenido, username, idArticulo, token)
     if (newComment) {
-      onCommentAdded(newComment, idArticulo);
-      setContenido(''); // Limpia el formulario después de enviar
+      onCommentAdded() // Llama a la función refetch para recargar los comentarios
+      setContenido('')
     }
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col space-y-4 mt-4">
@@ -39,15 +38,14 @@ const CreateComentarioForm = ({ idArticulo, username, token, onCommentAdded }) =
       </button>
       {error && <p className="text-red-500 text-sm">{error}</p>}
     </form>
-  );
-};
+  )
+}
 
-// Define PropTypes para CreateComentarioForm
 CreateComentarioForm.propTypes = {
-  idArticulo: PropTypes.string.isRequired, // Asegúrate de que idArticulo sea requerido y sea de tipo string
-  username: PropTypes.string.isRequired, // Asegúrate de que idArticulo sea requerido y sea de tipo string
-  token: PropTypes.string.isRequired, // Asegúrate de que idArticulo sea requerido y sea de tipo string
-  onCommentAdded: PropTypes.func.isRequired, // Asegúrate de que onCommentAdded sea requerido y sea de tipo función
-};
+  idArticulo: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
+  onCommentAdded: PropTypes.func.isRequired,
+}
 
-export default CreateComentarioForm;
+export default CreateComentarioForm

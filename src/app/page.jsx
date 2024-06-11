@@ -2,14 +2,14 @@
 'use client';
 
 import React from 'react';
-import ArticulosList from '../components/ArticulosList';
 import MainLayout from '../components/layout/MainLayout';
+import Sections from '../components/Sections';
 
 
 export default function Index() {
   return (
     <MainLayout>
-      <ArticulosList/>
+      <Sections/>
     </MainLayout>    
   );
 }

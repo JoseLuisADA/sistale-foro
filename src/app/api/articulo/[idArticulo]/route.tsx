@@ -3,6 +3,20 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axiosInstance from '../../../../../axios';  // Asegúrate de que la ruta sea correcta
 
+export async function GET(req: NextRequest, { params }) {
+  const { idArticulo } = params;
+
+  try {
+    const { data } = await axiosInstance.get(`/articulo/${idArticulo}`);
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error('Error al obtener el artículo:', error);
+    const status = error.response?.status || 500;
+    const message = error.response?.data.message || 'Error interno del servidor';
+    return new Response(message, { status });
+  }
+}
+
 export async function DELETE(req: NextRequest) {
   const { pathname } = new URL(req.url);
   const idArticulo = pathname.split('/').pop(); // Extrae el ID del artículo del URL

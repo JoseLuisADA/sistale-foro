@@ -1,4 +1,3 @@
-// sistaleforo-web-final/src/app/api/articulo/route.tsx
 "use server"
 import axiosInstance from '../../../../axios';  // Importa la instancia de Axios configurada
 import { NextRequest, NextResponse } from 'next/server';
@@ -7,10 +6,11 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const page = searchParams.get('page') || '1';
   const size = searchParams.get('size') || '10';
+  const categoria = searchParams.get('categoria');
 
   try {
     const { data } = await axiosInstance.get(`/articulos`, {
-      params: { page, size }
+      params: { page, size, categoria }
     });
 
     return NextResponse.json(data);
@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
       titulo: body.titulo,
       contenido: body.contenido,
       username: body.username,
+      categoria: body.categoria,
     }, {
       headers: {
         'Authorization': `${req.headers.get('Authorization')}`
@@ -44,5 +45,3 @@ export async function POST(req: NextRequest) {
     return new Response(message, { status });
   }
 }
-
-

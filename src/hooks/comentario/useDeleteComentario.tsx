@@ -17,7 +17,6 @@ const useDeleteComentario = () => {
       if (!response.ok) {
         throw new Error('No se pudo eliminar el comentario');
       }
-      alert("Comentario eliminado correctamente")
       return true; // Return true if the comment is deleted successfully
     } catch (error) {
       alert("No se pudo borrar el comentario");
