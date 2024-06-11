@@ -14,7 +14,7 @@ const FutureUpdates = () => {
             {futureUpdates.map((update, index) => (
               <div key={index} className="p-4 border rounded-lg shadow-sm bg-white">
                 <div className='flex'>
-                  <img className='mr-3' src="https://nosapki.com/images/icons/1388.png"></img>
+                  <img className='mr-3 object-contain' src="https://nosapki.com/images/icons/1388.png"></img>
                   <h2 className="text-2xl font-semibold">{update.title}</h2>
                 </div>
                 <p className="mt-2">{update.description}</p>
