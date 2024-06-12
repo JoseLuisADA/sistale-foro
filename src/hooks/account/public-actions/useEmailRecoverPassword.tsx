@@ -1,15 +1,17 @@
 // src/hooks/account/useRecoverPassword.tsx
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'
 
 const useRecoverPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   const recoverPassword = async (username) => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/account/public-actions/recover-password', {
+      const response = await fetch('/api/account/public-actions/email-recover-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,6 +26,7 @@ const useRecoverPassword = () => {
       }
 
       alert('Se ha enviado un correo electrónico para recuperar la contraseña');
+      router.push('/login');
     } catch (error) {
       setError(error.message);
     } finally {
