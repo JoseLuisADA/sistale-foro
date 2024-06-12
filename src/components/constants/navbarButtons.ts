@@ -4,11 +4,6 @@ export const publicNavigation = [
       href: '/', 
       current: false 
     },
-    { 
-      name: 'Futuras actualizaciones', 
-      href: '/future-updates', 
-      current: false 
-    }
   ]
   
 export const protectedNavigation = [
