@@ -4,6 +4,11 @@ export const publicNavigation = [
       href: '/', 
       current: false 
     },
+    { 
+      name: 'Equipo de Sistale', 
+      href: '/team', 
+      current: false 
+    },
   ]
   
 export const protectedNavigation = [
