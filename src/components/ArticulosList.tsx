@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 
 interface ArticulosListProps {
   categoria: string
-  limit: number
+  limit?: number
 }
 
 const ArticulosList = ({ categoria, limit }: ArticulosListProps) => {
