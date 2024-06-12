@@ -6,15 +6,16 @@ import { useRouter } from 'next/navigation'
 
 interface ArticulosListProps {
   categoria: string
+  limit: number
 }
 
-const ArticulosList = ({ categoria }: ArticulosListProps) => {
+const ArticulosList = ({ categoria, limit }: ArticulosListProps) => {
   {
     /* PAGINACIÓN (EN PENSAMIENTO DE COMO IMPLEMENTARLA EL CAMBIO DE LAS CATEGORIAS)
   const [page, setPage] = useState(1);
   */
   }
-  const { articulos, isLoading, error, refetch } = useArticulos(1, categoria) //El 1 simboliza la pagina pero está hardcodeado para su funcionamiento ya que está pendiente la implementación del paginado
+  const { articulos, isLoading, error, refetch } = useArticulos(1, categoria, limit) //El 1 simboliza la pagina pero está hardcodeado para su funcionamiento ya que está pendiente la implementación del paginado
   const router = useRouter()
 
   useEffect(() => {
