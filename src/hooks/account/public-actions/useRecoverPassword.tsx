@@ -10,7 +10,7 @@ const useResetPassword = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/account/public-actions/reset-password', {
+      const response = await fetch('/api/account/public-actions/recover-password', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     const { username } = payload;
 
     // Update the user's password in the database
-    await axiosInstance.put('/change-password', { username, newPassword },{
+    await axiosInstance.put('/change-password-recovery', { username, newPassword },{
       headers: {
         'Authorization': req.headers.get('Authorization') || '',
         'Content-Type': 'application/json',
