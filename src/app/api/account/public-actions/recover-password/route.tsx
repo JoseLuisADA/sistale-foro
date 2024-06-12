@@ -8,7 +8,7 @@ import { jwtVerify } from 'jose'
 export async function POST(req: NextRequest) {
   try {
     const { token, newPassword } = await req.json();
-
+    console.log('RECOVER PASSWORD ROUTE :')
     console.log('TOKEN')
     console.log(token)
     console.log('NEW PASSWORD')
