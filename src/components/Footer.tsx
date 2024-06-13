@@ -11,7 +11,7 @@ const Footer = () => (
             <p className="mt-2">La versión que todos esperaban</p>
           </div>
           <div className="flex space-x-4">
-            <Link href="/about-us" className="hover:underline">Sobre Nosotros</Link>
+            <Link href="/about-us" className="hover:underline text-yellow-400 hover:text-yellow-200">Sobre Nosotros</Link>
           </div>
         </div>
         <div className="mt-4 text-center">
