@@ -97,7 +97,6 @@ export default function Example() {
                     <div>
                       <MenuButton className="flex items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <img
-                          className="h-8 w-8 rounded-full"
                           src="https://nosapki.com/images/nt-images/player-online.png"
                           alt="User photo"
                         />
