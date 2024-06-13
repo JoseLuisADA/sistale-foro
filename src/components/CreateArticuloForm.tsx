@@ -26,8 +26,26 @@ const CreateArticuloForm = ({ username, token }: CreateArticuloFormProps) => {
   };
 
   return (
-    <div className='flex justify-center mt-10'>
-      <form onSubmit={handleSubmit} className="w-1/2 flex flex-col space-y-4 p-5 bg-white shadow-md rounded-lg">
+    <div 
+      className='
+      flex 
+      justify-center 
+      mt-10
+      max-[375px]:m-0
+      '>
+      <form onSubmit={handleSubmit} 
+      className="
+      max-[375px]:w-full
+      max-[375px]:w-full
+      w-1/2 
+      flex 
+      flex-col 
+      space-y-4 
+      p-5 
+    bg-white 
+      shadow-md 
+      rounded-lg
+      ">
         <div className='flex w-full'>
           <h2 className='mr-5 whitespace-nowrap'>Sección :</h2>
           <select
