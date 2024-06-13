@@ -79,7 +79,7 @@ const LoginPage = () => {
               ¿Olvidaste tu contraseña?
             </Link>
           </div>
-          {error && <p className="text-red-500 text-center font-bold italic">{error}</p>}
+          {error && <p className="text-red-500 mt-5 text-center font-bold italic">{error}</p>}
         </form>
         
         <div className='ml-3 mr-3'></div>
