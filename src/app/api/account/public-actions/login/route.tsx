@@ -38,12 +38,10 @@ export async function POST(req: NextRequest) {
 
     return res;
   } catch (error: unknown) {
-    console.log(error);
     if (isAxiosError(error)) {
-      if (error.response && error.response.status === 401) {
-        return NextResponse.json({ message: "Credenciales inválidas" }, { status: 401 });
-      }
+      console.log(error)
+      return NextResponse.json({ message: error.response?.data.message || "El foro de Sistale actualmente no está disponible" }, { status: error.response?.status || 500 });
     }
-    return NextResponse.json({ message: "Error interno" }, { status: 500 });
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }

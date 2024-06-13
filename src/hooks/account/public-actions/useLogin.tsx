@@ -16,16 +16,14 @@ const useLogin = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
-        credentials: 'include' // Esto es importante para enviar cookies
+        credentials: 'include'
       })
-
       const data = await response.json()
       if (!response.ok) {
         throw new Error(data.message || 'Error al iniciar sesión')
       }
       router.push('/')
     } catch (error) {
-      console.log(error)
       setError(error.message)
     } finally {
       setIsLoading(false)
@@ -33,6 +31,7 @@ const useLogin = () => {
   }
 
   return { login, isLoading, error }
+
 }
 
 export default useLogin
