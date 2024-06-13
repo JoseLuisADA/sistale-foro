@@ -18,16 +18,12 @@ export async function PUT(req: NextRequest) {
   } catch (error: unknown) {
     console.error(error);
     if (isAxiosError(error)) {
-      if (error.response && error.response.status === 401) {
-        return NextResponse.json({ message: 'No autorizado' }, { status: 401 });
-      } else if (error.response && error.response.status === 400) {
-        return NextResponse.json({ message: 'Contraseña actual incorrecta' }, { status: 400 });
-      } else if (error.response && error.response.status === 404) {
-        return NextResponse.json({ message: 'No encontrado' }, { status: 404 });
-      } else if (error.response && error.response.status === 500) {
-        return NextResponse.json({ message: 'Error interno del servidor' }, { status: 500 });
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
       }
+      console.log(error)
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
     }
-    return NextResponse.json({ message: 'Error desconocido' }, { status: 500 });
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }

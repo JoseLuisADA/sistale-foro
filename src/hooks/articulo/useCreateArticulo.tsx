@@ -25,12 +25,12 @@ const useCreateArticulo = () => {
       if (!response.ok) {
         throw new Error(data);
       }
+      setIsLoading(false);
       router.push('/');
       return data;
     } catch (error) {
-      console.log("Error al crear el articulo en el hook :")
-      console.log(error);
-      setError(error);
+      setError(error.message);
+      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }

@@ -39,8 +39,11 @@ export async function POST(req: NextRequest) {
     return res;
   } catch (error) {
     if (isAxiosError(error)) {
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
+      }
       console.log(error)
-      return NextResponse.json({ message: error.response?.data.message || "El foro de Sistale actualmente no está disponible" }, { status: error.response?.status || 500 });
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
     }
     return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }

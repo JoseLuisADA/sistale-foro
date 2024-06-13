@@ -25,17 +25,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ message: 'Cuenta creada' }, { status: 201 });
   } catch (error: unknown) {
-    console.log(error);
     if (isAxiosError(error)) {
-      if (error.response) {
-        if (error.response.status === 409) {
-          return NextResponse.json({ message: "El usuario ya existe" }, { status: 409 });
-        } else if (error.response.status === 400) {
-          return NextResponse.json({ message: error.response.data.message || "Solicitud incorrecta" }, { status: 400 });
-        }
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
       }
-      return NextResponse.json({ message: "Error desconocido al intentar registrarse" }, { status: 500 });
+      console.log(error)
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
     }
-    return NextResponse.json({ message: "Error interno" }, { status: 500 });
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }

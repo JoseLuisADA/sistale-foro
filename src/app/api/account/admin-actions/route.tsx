@@ -17,12 +17,13 @@ export async function GET(req: NextRequest) {
   } catch (error) {
     console.error(error);
     if (isAxiosError(error)) {
-      if (error.response) {
-        const message = error.response.data.message || 'Error desconocido al obtener usuarios';
-        return NextResponse.json({ message }, { status: error.response.status });
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
       }
+      console.log(error)
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
     }
-    return NextResponse.json({ message: 'Error interno' }, { status: 500 });
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }
 
@@ -47,8 +48,14 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json({ message: 'Usuario eliminado correctamente' }, { status: 200 });
   } catch (error) {
-    console.error('Error al eliminar el usuario:', error);
-    return NextResponse.json({ message: 'Error interno' }, { status: 500 });
+    if (isAxiosError(error)) {
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
+      }
+      console.log(error)
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
+    }
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }
 
@@ -73,7 +80,13 @@ export async function PATCH(req: NextRequest) {
 
     return NextResponse.json({ message: 'Rol de usuario cambiado correctamente' }, { status: 200 });
   } catch (error) {
-    console.error('Error al cambiar el rol del usuario:', error);
-    return NextResponse.json({ message: 'Error interno' }, { status: 500 });
+    if (isAxiosError(error)) {
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
+      }
+      console.log(error)
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
+    }
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }

@@ -28,13 +28,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(data, { status: 201 });
   } catch (error) {
-    console.error(error);
     if (isAxiosError(error)) {
-      if (error.response) {
-        const message = error.response.data.message || "Error desconocido al crear el comentario";
-        return NextResponse.json({ message }, { status: error.response.status });
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
       }
+      console.log(error)
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
     }
-    return NextResponse.json({ message: "Error interno" }, { status: 500 });
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }

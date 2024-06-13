@@ -2,6 +2,7 @@
 "use server"
 import { NextRequest, NextResponse } from 'next/server';
 import axiosInstance from '../../../../../axios';  // Asegúrate de que la ruta sea correcta
+import { isAxiosError } from 'axios';
 
 export async function GET(req: NextRequest, { params }) {
   const { idArticulo } = params;
@@ -10,10 +11,14 @@ export async function GET(req: NextRequest, { params }) {
     const { data } = await axiosInstance.get(`/articulo/${idArticulo}`);
     return NextResponse.json(data);
   } catch (error) {
-    console.error('Error al obtener el artículo:', error);
-    const status = error.response?.status || 500;
-    const message = error.response?.data.message || 'Error interno del servidor';
-    return new Response(message, { status });
+    if (isAxiosError(error)) {
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
+      }
+      console.log(error)
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
+    }
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }
 
@@ -36,8 +41,14 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json({ message: 'Artículo eliminado correctamente' }, { status: 200 });
   } catch (error) {
-    console.error('Error al eliminar el artículo:', error);
-    return NextResponse.json({ message: 'Error interno' }, { status: 500 });
+    if (isAxiosError(error)) {
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
+      }
+      console.log(error)
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
+    }
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }
 
@@ -67,10 +78,14 @@ export async function PATCH(req: NextRequest, { params }) {
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    console.log("ERROR EN ARTICULO ROUTE PUT:")
-    console.log(error)
-    const message = error.response?.data.message || 'Error desconocido al actualizar el artículo';
-    return NextResponse.json({ message }, { status: error.response?.status || 500 });
+    if (isAxiosError(error)) {
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
+      }
+      console.log(error)
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
+    }
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }
 

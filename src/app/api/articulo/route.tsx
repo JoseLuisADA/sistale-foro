@@ -16,15 +16,14 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(data);
   } catch (error) {
-    console.error('Error al obtener los artículos:');
     if (isAxiosError(error)) {
-      console.error('Error de Axios:', error.response?.data);
-      const status = error.response?.status || 500;
-      const message = error.response?.data.message || 'Error interno del servidor';
-      return new Response(message, { status });
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
+      }
+      console.log(error)
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
     }
-    console.error('Error desconocido:', error);
-    return new Response('Error interno del servidor', { status: 500 });
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }
 
@@ -45,13 +44,12 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    console.error('Error al crear el artículo:');
     if (isAxiosError(error)) {
       if(error.code === 'ECONNREFUSED') {
         return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
       }
       console.log(error)
-      return NextResponse.json({ message: error.response?.data.message || "El foro de Sistale actualmente no está disponible" }, { status: error.response?.status || 500 });
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
     }
     return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }

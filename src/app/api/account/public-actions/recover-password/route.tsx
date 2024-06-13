@@ -3,6 +3,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axiosInstance from '../../../../../../axios';
 import { jwtVerify } from 'jose'
+import { isAxiosError } from 'axios';
 
 
 export async function POST(req: NextRequest) {
@@ -30,7 +31,13 @@ export async function POST(req: NextRequest) {
     
     return NextResponse.json({ message: 'La contraseña se ha restablecido con éxito' }, { status: 200 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: 'Error al restablecer la contraseña' }, { status: 500 });
+    if (isAxiosError(error)) {
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
+      }
+      console.log(error)
+      return NextResponse.json(error.response?.data.message, { status: error.response?.status || 500 });
+    }
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }
