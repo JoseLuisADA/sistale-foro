@@ -10,7 +10,8 @@ const Sections = () => {
         <div className="flex">
           <Link href="/sections/notices-and-updates">
             <img className="object-contain absolute" src="https://i.ibb.co/YWDBc74/1218.png"></img>
-            <h2 className="text-2xl font-bold mb-4 ml-12">Noticias y Actualizaciones</h2>
+            <h2 className="text-2xl font-bold mb-4 ml-12 inline">Noticias y Actualizaciones</h2>
+            <p className='inline ml-3'>Ver más...</p>
           </Link>
         </div>
         <ArticulosList categoria="noticias" limit={3} />
@@ -19,7 +20,8 @@ const Sections = () => {
         <div className="flex">
           <Link href="/sections/community">
             <img className="object-contain rounded-full absolute" src="https://nosapki.com/images/icons/5010.png"></img>
-            <h2 className="text-2xl font-bold mb-4 ml-12">Comunidad</h2>
+            <h2 className="text-2xl font-bold mb-4 ml-12 inline">Comunidad</h2>
+            <p className='inline ml-3'>Ver más...</p>
           </Link>
         </div>
         <ArticulosList categoria="comunidad" limit={3} />
