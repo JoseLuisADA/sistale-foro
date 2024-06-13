@@ -17,11 +17,6 @@ const CreateArticuloForm = ({ username, token }: CreateArticuloFormProps) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("ENTRANDO EN COMPONENTE CREATE ARTICULO FORM:");
-    console.log("USERNAME:");
-    console.log(username);
-    console.log("TOKEN:");
-    console.log(token);
     await createArticulo(titulo, contenido, categoria, token, username);
   };
 
@@ -35,7 +30,6 @@ const CreateArticuloForm = ({ username, token }: CreateArticuloFormProps) => {
       '>
       <form onSubmit={handleSubmit} 
       className="
-      max-[375px]:w-full
       max-[375px]:w-full
       w-1/2 
       flex 
@@ -81,7 +75,7 @@ const CreateArticuloForm = ({ username, token }: CreateArticuloFormProps) => {
         >
           Crear Artículo
         </button>
-        {error && <p>{error}</p>}
+        {error && <p className="text-red-500 mt-5 text-center font-bold italic">{error}</p>}
       </form>
     </div>
   );

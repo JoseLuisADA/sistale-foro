@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
     }
 
     return res;
-  } catch (error: unknown) {
+  } catch (error) {
     if (isAxiosError(error)) {
       console.log(error)
       return NextResponse.json({ message: error.response?.data.message || "El foro de Sistale actualmente no está disponible" }, { status: error.response?.status || 500 });

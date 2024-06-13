@@ -1,6 +1,7 @@
 "use server"
 import axiosInstance from '../../../../axios';  // Importa la instancia de Axios configurada
 import { NextRequest, NextResponse } from 'next/server';
+import { isAxiosError } from 'axios';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -15,10 +16,15 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(data);
   } catch (error) {
-    console.error('Error al obtener los artículos:', error);
-    const status = error.response?.status || 500;
-    const message = error.response?.data.message || 'Error interno del servidor';
-    return new Response(message, { status });
+    console.error('Error al obtener los artículos:');
+    if (isAxiosError(error)) {
+      console.error('Error de Axios:', error.response?.data);
+      const status = error.response?.status || 500;
+      const message = error.response?.data.message || 'Error interno del servidor';
+      return new Response(message, { status });
+    }
+    console.error('Error desconocido:', error);
+    return new Response('Error interno del servidor', { status: 500 });
   }
 }
 
@@ -37,11 +43,16 @@ export async function POST(req: NextRequest) {
       }
     });
 
-    return NextResponse.json(data, { status: 201 });
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    console.error('Error al crear el artículo:', error);
-    const status = error.response?.status || 500;
-    const message = error.response?.data.message || 'Error desconocido al crear el artículo';
-    return new Response(message, { status });
+    console.error('Error al crear el artículo:');
+    if (isAxiosError(error)) {
+      if(error.code === 'ECONNREFUSED') {
+        return NextResponse.json("El foro de Sistale actualmente no está disponible", { status: 500 });
+      }
+      console.log(error)
+      return NextResponse.json({ message: error.response?.data.message || "El foro de Sistale actualmente no está disponible" }, { status: error.response?.status || 500 });
+    }
+    return NextResponse.json({ message: "El foro de Sistale actualmente no está disponible" }, { status: 500 });
   }
 }

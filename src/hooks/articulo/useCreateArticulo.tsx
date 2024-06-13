@@ -23,13 +23,14 @@ const useCreateArticulo = () => {
 
       const data = await response.json();
       if (!response.ok) {
-        throw new Error('Error al crear el artículo');
+        throw new Error(data);
       }
       router.push('/');
       return data;
     } catch (error) {
+      console.log("Error al crear el articulo en el hook :")
       console.log(error);
-      setError(error.message || 'Error desconocido');
+      setError(error);
     } finally {
       setIsLoading(false);
     }
