@@ -14,7 +14,7 @@ export const publicNavigation = [
 export const protectedNavigation = [
     { 
       name: 'Crear artículo', 
-      href: '/crear-articulo', 
+      href: '/create-article', 
       current: false 
     },
     { 
