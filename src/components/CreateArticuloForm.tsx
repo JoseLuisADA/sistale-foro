@@ -9,7 +9,7 @@ interface CreateArticuloFormProps {
   token: string;
 }
 
-const CreateArticuloForm = ({ username, token }: CreateArticuloFormProps) => {
+const CreateArticuloForm = ({ token }: CreateArticuloFormProps) => {
   const [titulo, setTitulo] = useState('');
   const [contenido, setContenido] = useState('');
   const [categoria, setCategoria] = useState('noticias'); // Por defecto, categoría "noticias"
@@ -17,7 +17,7 @@ const CreateArticuloForm = ({ username, token }: CreateArticuloFormProps) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await createArticulo(titulo, contenido, categoria, token, username);
+    await createArticulo(titulo, contenido, categoria, token);
   };
 
   return (

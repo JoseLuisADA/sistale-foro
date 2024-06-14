@@ -7,7 +7,7 @@ const useCreateArticulo = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const createArticulo = async (titulo: string, contenido: string, categoria: string, token: string, username: string) => {
+  const createArticulo = async (titulo: string, contenido: string, categoria: string, token: string) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -17,7 +17,7 @@ const useCreateArticulo = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` // Assuming bearer token is used
         },
-        body: JSON.stringify({ titulo, contenido, categoria, username }),
+        body: JSON.stringify({ titulo, contenido, categoria}),
         credentials: 'include',
       });
 

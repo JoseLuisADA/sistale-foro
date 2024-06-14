@@ -34,7 +34,6 @@ export async function POST(req: NextRequest) {
     const { data } = await axiosInstance.post(`/articulo`, {
       titulo: body.titulo,
       contenido: body.contenido,
-      username: body.username,
       categoria: body.categoria,
     }, {
       headers: {
