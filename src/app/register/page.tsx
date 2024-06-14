@@ -59,7 +59,16 @@ const SignUpPage = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
             {zodErrors.username && <p className="text-red-500 text-xs italic">{zodErrors.username}</p>}
-            <p className="text-gray-600 text-xs italic">Debe ser único y contener al menos 1 carácter.</p>
+            <p className="text-gray-600 text-xs italic">
+              • Debe ser único
+              <br/>
+              • Contener al menos 1 caracter
+              <br/>
+              • No tener espacios
+              <br/>
+              • No tener más de 20 caracteres
+              <br/>
+              • No puede contener caracteres especiales solo letras y numeros.</p>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
