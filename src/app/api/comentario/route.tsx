@@ -7,15 +7,11 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
  
   try {
-    console.log("ENTRANDO EN POST DE COMENTARIO ROUTE:")
-    console.log("TOKEN")
-    console.log(body.token)
     const { data } = await axios.post(
       `${process.env.NEXT_PUBLIC_API_SERVER_URL}/comentario`,
       {
         contenido: body.contenido,
         idArticulo: body.idArticulo,
-        username: body.username,
       },
       {
         headers: {

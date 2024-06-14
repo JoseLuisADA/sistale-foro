@@ -3,16 +3,13 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import useCreateComentario from '../hooks/comentario/useCreateComentario'
 
-const CreateComentarioForm = ({ idArticulo, username, token, onCommentAdded }) => {
+const CreateComentarioForm = ({ idArticulo, token, onCommentAdded }) => {
   const [contenido, setContenido] = useState('')
   const { createComentario, isLoading, error } = useCreateComentario()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log("ENTRANDO EN HANDLE SUBMIT DE CREATE COMENTARIO FORM")
-    console.log("ID ARTICULO:")
-    console.log(idArticulo)
-    const newComment = await createComentario(contenido, username, idArticulo, token)
+    const newComment = await createComentario(contenido, idArticulo, token)
     if (newComment) {
       onCommentAdded() // Llama a la función refetch para recargar los comentarios
       setContenido('')

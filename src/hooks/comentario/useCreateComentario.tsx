@@ -4,7 +4,7 @@ const useCreateComentario = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const createComentario = async (contenido: string, username: string, idArticulo: string, token: string) => {
+  const createComentario = async (contenido: string, idArticulo: string, token: string) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -14,7 +14,7 @@ const useCreateComentario = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` // Asegúrate de usar el esquema de autorización correcto
         },
-        body: JSON.stringify({ contenido, username, idArticulo })
+        body: JSON.stringify({ contenido, idArticulo })
       });
 
       const data = await response.json();
