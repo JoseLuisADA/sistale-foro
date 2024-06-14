@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
 
   try {
-      await axios.post(
+      const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_SERVER_URL}/register`,
       {
         username: body.username,
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       }
     );
 
-    return NextResponse.json({ message: 'Cuenta creada' }, { status: 201 });
+    return NextResponse.json(response.data);
   } catch (error: unknown) {
     if (isAxiosError(error)) {
       if(error.code === 'ECONNREFUSED') {

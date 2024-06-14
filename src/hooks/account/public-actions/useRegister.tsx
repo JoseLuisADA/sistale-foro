@@ -20,7 +20,7 @@ const useRegister = () => {
 
       const data = await response.json()
       if (!response.ok) {
-        throw new Error(data.message || 'Error al registrarse')
+        throw new Error(data)
       }
       await login(username, password)
     } catch (error) {
