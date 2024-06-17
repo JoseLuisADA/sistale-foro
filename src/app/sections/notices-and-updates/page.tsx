@@ -11,7 +11,7 @@ const NoticesAndUpdatesPage = () => {
                 <div className='flex '>
                     <img
                     className='object-contain rounded-full absolute' 
-                    src="https://nosapki.com/images/icons/5010.png"></img>
+                    src="https://i.ibb.co/YWDBc74/1218.png"></img>
                     <h1 className="text-3xl font-bold mb-4 ml-12">Noticias y actualizaciones</h1>
                 </div>
                 <ArticulosList categoria="noticias" />
